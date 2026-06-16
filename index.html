@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ETF 数据看板</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <h1>📊 ETF 数据看板</h1>
+        <p>自动采集 · 每日更新</p>
+    </header>
+
+    <main>
+        <section id="data-overview">
+            <h2>数据概览</h2>
+            <div id="data-container">
+                <p class="loading">数据加载中...</p>
+            </div>
+        </section>
+
+        <section id="update-info">
+            <p>最后更新：<span id="last-update">--</span></p>
+        </section>
+    </main>
+
+    <footer>
+        <p>数据来源：上海证券交易所 · 深圳证券交易所</p>
+        <p>Powered by GitHub Actions · 每日凌晨自动采集</p>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
