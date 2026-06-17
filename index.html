@@ -7,34 +7,58 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <header>
-        <h1>📊 ETF 数据看板</h1>
-        <p>自动采集 · 每日更新</p>
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="/" class="logo">📊 ETF 数据看板</a>
+                <ul class="nav-links">
+                    <li><a href="index.html" class="active">首页</a></li>
+                    <li><a href="materials.html">资料</a></li>
+                </ul>
+                <button class="menu-toggle" aria-label="菜单">☰</button>
+            </nav>
+        </div>
     </header>
 
-    <main>
-        <section id="data-overview">
-            <h2>📋 全市场ETF数据</h2>
-            <p>覆盖深交所 + 上交所全部ETF，含份额、净值、市值及排行榜。</p>
-            <div class="download-box">
-                <a href="assets/posts/%E5%85%A8%E5%B8%82%E5%9C%BA%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E8%A1%A802.xlsx" class="download-btn" download>
-                    📥 下载全市场数据分析表 (Excel)
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>📊 全市场 ETF 数据</h1>
+                <p>深交所 + 上交所全部ETF自动采集 · 份额 · 净值 · 市值 · 排行榜</p>
+                <div class="hero-buttons">
+                    <a href="materials.html" class="btn btn-primary">浏览数据</a>
+                    <a href="https://github.com/dagoushi003/dagoushi003.github.io" class="btn btn-secondary">GitHub 仓库</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">✨ 最近更新</h2>
+            <div class="posts-grid" id="recent-posts">
+                <!-- JS 动态加载 -->
+            </div>
+        </div>
+    </section>
+
+    <section class="section section-alt">
+        <div class="container">
+            <h2 class="section-title">📂 分类浏览</h2>
+            <div class="categories">
+                <a href="materials.html" class="category-card">
+                    <div class="category-icon">📊</div>
+                    <h3>ETF 数据</h3>
+                    <p>全市场ETF数据分析表 · 每日更新</p>
                 </a>
-                <p class="hint">Excel 文件可直接打开，包含4个Sheet：全量数据 · 全部排行榜 · 大市值 · 小市值</p>
             </div>
-            <div id="data-container">
-                <p class="loading">数据加载中...</p>
-            </div>
-        </section>
+        </div>
+    </section>
 
-        <section id="update-info">
-            <p>🕐 最后更新：<span id="last-update">--</span></p>
-        </section>
-    </main>
-
-    <footer>
-        <p>数据来源：上海证券交易所 · 深圳证券交易所</p>
-        <p>Powered by GitHub Actions · 每日凌晨自动采集</p>
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 ETF 数据看板 · Powered by GitHub Actions</p>
+        </div>
     </footer>
 
     <script src="js/main.js"></script>
