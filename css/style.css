@@ -114,6 +114,36 @@ section h2 {
 .data-card .change.up { color: #e74c3c; }
 .data-card .change.down { color: #27ae60; }
 
+.download-box {
+    text-align: center;
+    padding: 1.5rem;
+    background: #f0f4ff;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+}
+
+.download-btn {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    transition: opacity 0.2s;
+}
+
+.download-btn:hover {
+    opacity: 0.9;
+}
+
+.hint {
+    margin-top: 0.75rem;
+    color: #888;
+    font-size: 0.85rem;
+}
+
 #update-info {
     text-align: center;
     color: #888;

@@ -32,6 +32,11 @@ jobs:
       - name: 设置时区
         run: sudo ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
+      - name: 配置 Git 身份
+        run: |
+          git config --global user.name 'ETF Spider Bot'
+          git config --global user.email 'dagoushi003@163.com'
+
       - name: 安装 Chrome
         uses: browser-actions/setup-chrome@v1
         with:
