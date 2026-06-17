@@ -517,14 +517,16 @@ def write_data_sheet(ws, all_data, prev_map, today_str):
         ws.cell(row, COL_MKT_YEST).value = mkt_yest
         ws.cell(row, COL_MKT_CHANGE).value = mkt_change
 
-        # K 列：市值变化百分比（Python 计算，不用 Excel 公式避免 openpyxl #REF! BUG）
-        mkt_pct_val = round(mkt_change / mkt_yest, 6) if (mkt_change is not None and mkt_yest and mkt_yest != 0) else None
-        ws.cell(row, COL_MKT_PCT).value = mkt_pct_val
+        # K 列：市值变化百分比
+        j_ref = ws.cell(row, COL_MKT_CHANGE).coordinate
+        i_ref = ws.cell(row, COL_MKT_YEST).coordinate
+        ws.cell(row, COL_MKT_PCT).value = f'=IFERROR({j_ref}/{i_ref},"")'
         ws.cell(row, COL_MKT_PCT).number_format = "0.00%"
 
         # L 列：份额变化百分比
-        share_pct_val = round((share - share_yest) / share_yest, 6) if (share_yest and share_yest != 0) else None
-        ws.cell(row, COL_SHARE_PCT).value = share_pct_val
+        d_ref = ws.cell(row, COL_SHARE_TODAY).coordinate
+        e_ref = ws.cell(row, COL_SHARE_YEST).coordinate
+        ws.cell(row, COL_SHARE_PCT).value = f'=IFERROR(({d_ref}-{e_ref})/{e_ref},"")'
         ws.cell(row, COL_SHARE_PCT).number_format = "0.00%"
 
         written += 1
