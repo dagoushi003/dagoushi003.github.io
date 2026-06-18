@@ -7,7 +7,7 @@ name: 全市场ETF数据采集
 on:
   schedule:
     # 北京时间 03:00 = UTC 19:00
-    - cron: '0 19 * * 1-5'   # 周一至周五
+    - cron: '0 21 * * 1-5'   # 周一至周五（北京时间05:00）
   workflow_dispatch:          # 支持手动运行
 
 # 防止重复运行
@@ -21,7 +21,7 @@ permissions:
 jobs:
   spider:
     runs-on: ubuntu-latest
-    timeout-minutes: 180  # SSE有860只，最多给3小时（防限流慢速）
+    timeout-minutes: 120  # SSE有860只，最多给2小时
 
     steps:
       - name: 检出仓库

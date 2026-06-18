@@ -408,8 +408,6 @@ def fetch_sse_all_data(code_list):
                     failed.append(code)
                     print(f" [{idx}/{total}] ⚠️ {code}: 获取失败（无份额数据）")
 
-                time.sleep(0.3)  # 防限流，每只间等0.3秒
-
                 # 每100只输出进度
                 if idx % 100 == 0:
                     elapsed = time.time() - t_start
