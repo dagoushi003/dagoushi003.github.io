@@ -21,7 +21,7 @@ permissions:
 jobs:
   spider:
     runs-on: ubuntu-latest
-    timeout-minutes: 120  # SSE有860只，最多给2小时
+    timeout-minutes: 180  # SSE有860只，最多给3小时（防限流慢速）
 
     steps:
       - name: 检出仓库
