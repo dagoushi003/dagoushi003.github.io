@@ -749,6 +749,28 @@ def git_commit_and_push(repo_dir, today_str):
         return False
 
 # =====================================================================
+# 去重检查：今天的日期在Excel里是否已有数据
+# =====================================================================
+def check_today_already_done(today_str):
+    """检查Excel中是否已有今天日期的数据，有则跳过本次运行"""
+    if not os.path.exists(EXCEL_FILE_PATH):
+        return False
+    try:
+        wb = load_workbook(EXCEL_FILE_PATH)
+        ws = wb["全市场ETF数据"]
+        for row in range(2, ws.max_row + 1):
+            val = ws.cell(row, COL_DATE).value
+            if val and str(val).strip() == today_str:
+                print(f" ℹ️ 今天 {today_str} 的数据已存在，跳过本次运行")
+                wb.close()
+                return True
+        wb.close()
+    except Exception as e:
+        print(f" ⚠️ 去重检查异常: {e}")
+    return False
+
+
+# =====================================================================
 # 主流程
 # =====================================================================
 def run():
@@ -757,6 +779,11 @@ def run():
 
     start = get_now_shanghai()
     today_str = start.strftime("%Y-%m-%d")
+
+    # 去重：如果今天数据已有，跳过（用于多定时重试场景）
+    if check_today_already_done(today_str):
+        return
+
     sep = "=" * 55
 
     print(sep)
