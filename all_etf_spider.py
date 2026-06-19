@@ -143,10 +143,10 @@ SSE_LIST = [
 ]
 
 # =====================================================================
-# 全市场ETF数据 Sheet 列位置（12列）
+# 全市场ETF数据 Sheet 列位置（13列）
 # A=日期 B=代码 C=名称 D=当日份额 E=昨日份额 F=当日净值
 # G=当日净份额 H=当日市值 I=昨日市值 J=当日市值变化 K=市值变化百分比
-# L=份额变化百分比
+# L=份额变化百分比 M=当日净流入(亿)
 # =====================================================================
 COL_DATE = 1        # A
 COL_CODE = 2        # B
@@ -160,6 +160,7 @@ COL_MKT_YEST = 9    # I 昨日市值（亿）
 COL_MKT_CHANGE = 10 # J 当日市值变化(亿)
 COL_MKT_PCT = 11    # K 市值变化百分比
 COL_SHARE_PCT = 12  # L 份额变化百分比
+COL_NET_INFLOW = 13 # M 当日净流入(亿)
 
 HEADERS_SSE = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
@@ -447,7 +448,8 @@ def ensure_excel(path):
         "日期", "代码", "名称",
         "当日份额(万份)", "昨日份额(万份)", "当日净值",
         "当日净份额(万份)", "当日市值(亿)", "昨日市值（亿）",
-        "当日市值变化(亿)", "市值变化百分比", "份额变化百分比"
+        "当日市值变化(亿)", "市值变化百分比", "份额变化百分比",
+        "当日净流入(亿)"
     ]
     for c, h in enumerate(headers, 1):
         cell = ws1.cell(1, c, h)
@@ -528,6 +530,12 @@ def write_data_sheet(ws, all_data, prev_map, today_str):
         e_ref = ws.cell(row, COL_SHARE_YEST).coordinate
         ws.cell(row, COL_SHARE_PCT).value = f'=IFERROR(({d_ref}-{e_ref})/{e_ref},"")'
         ws.cell(row, COL_SHARE_PCT).number_format = "0.00%"
+
+        # M 列：当日净流入(亿) = 当日净值(F) * 当日净份额(G) / 10000
+        f_ref = ws.cell(row, COL_NAV).coordinate
+        g_ref = ws.cell(row, COL_NET_SHARE).coordinate
+        ws.cell(row, COL_NET_INFLOW).value = f'=IFERROR({f_ref}*{g_ref}/10000,"")'
+        ws.cell(row, COL_NET_INFLOW).number_format = "#,##0.0000"
 
         written += 1
 
